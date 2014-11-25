@@ -1,0 +1,6 @@
+%h1 レシピ一覧
+
+- @recipes.each do |recipe|
+  .recipe
+    %h3= link_to recipe.title, edit_recipe_path(recipe)
+    %p= recipe.catch_copy

@@ -1,0 +1,43 @@
+.recipe_show_wrapper
+  - if @recipe.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@recipe.errors.count, "error")} prohibited this recipe from being saved:"
+      %ul
+        - @recipe.errors.full_messages.each do |msg|
+          %li= msg
+
+  %h1= @recipe.title
+  .field
+    = image_tag @recipe.image.url(:medium)
+  .field
+    = @recipe.catch_copy
+
+  %h2 材料
+  .field
+    - @recipe.ingredients.each do |ingredient|
+      = ingredient.title
+      = ingredient.quantity
+
+  %h2 手順
+  - @recipe.directions.each do |direction|
+    .field
+      = direction.order
+      = image_tag direction.image.url(:medium) if direction.image?
+      = direction.description
+
+  %h2 つくれぽ
+  #tukurepos
+    = render @recipe.tukurepos
+
+  = link_to 'つくれぽを送る', '#new_tukurepo_modal', 'data-toggle' => 'modal'
+
+#new_tukurepo_modal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close(type="button" data-dismiss="modal" aria-hidden="true") &times;
+        %h4#myModalLabel.modal-title #{@recipe.title} へのつくれぽ
+      .modal-body
+        = render 'form_tukurepo'
+      .modal-footer
+        %button.btn.btn-default(type="button" data-dismiss="modal") Close

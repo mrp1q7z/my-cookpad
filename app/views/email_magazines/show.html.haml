@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @email_magazine.title
+
+= link_to 'Edit', edit_email_magazine_path(@email_magazine)
+\|
+= link_to 'Back', email_magazines_path

@@ -1,0 +1,42 @@
+.recipe_show_wrapper
+  = nested_form_for @recipe, html: { multipart: true } do |f|
+    - if @recipe.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@recipe.errors.count, "error")} prohibited this recipe from being saved:"
+        %ul
+          - @recipe.errors.full_messages.each do |msg|
+            %li= msg
+
+    %h1= @recipe.title
+    .field
+      = link_to '画像を削除', image_recipe_path, method: :delete, data: { confirm: '削除した写真は元に戻すことができません。本当に削除しますか？'} if @recipe.image?
+      = image_tag @recipe.image.url(:medium)
+    .field
+      = f.file_field :image
+    .field
+      = f.text_area :catch_copy, rows: 3, placeholder: 'このレシピのキャッチコピーを入力（検索結果にも表示されます）'
+    .actions
+      = f.submit
+
+    %h2 材料
+    = f.fields_for :ingredients do |ff|
+      .field
+        - i = ff.options[:child_index]
+        = ff.text_field :title, placeholder: ingredients_title_example(i)
+        = ff.text_field :quantity, placeholder: ingredients_quantity_example(i)
+        = ff.link_to_remove "削除"
+    %p= f.link_to_add "行を追加する", :ingredients
+
+    %h2 手順
+    = f.fields_for :directions do |ff|
+      .field.direction
+        = ff.number_field :order, class: 'direction_order'
+        - if ff.object.image?
+          = image_tag ff.object.image.url(:medium)
+        - else
+          = ff.file_field :image
+        = ff.text_field :description
+        = ff.link_to_remove "削除"
+    %p= f.link_to_add "追加", :directions
+
+  = link_to 'レシピを公開', publish_recipe_path, method: :patch, data: { confirm: 'レシピを公開します。よろしいですか？'}

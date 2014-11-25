@@ -1,0 +1,54 @@
+%h2 登録情報
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = devise_error_messages!
+  %h3 メール配信設定
+  = f.fields_for :subscriptions do |sub|
+    = sub.check_box :accept
+    = sub.object.email_magazine.title
+    %br
+
+  %h3 お客様情報
+  .field
+    = f.label :nickname, 'ニックネーム'
+    %br/
+    = f.text_field :nickname, autofocus: true
+  .field
+    = f.label :email, 'メールアドレス'
+    %br/
+    = f.email_field :email
+  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+    %div
+      Currently waiting confirmation for: #{resource.unconfirmed_email}
+  .field
+    = f.label :password, '新しいパスワード'
+    %i (変えない場合は空白のままにしてください)
+    %br/
+    = f.password_field :password, autocomplete: "off"
+  .field
+    = f.label :password_confirmation, '新しいパスワード（確認）'
+    %br/
+    = f.password_field :password_confirmation, autocomplete: "off"
+  .field
+    = f.label :current_password, '現在のパスワード'
+    %i (確認のため現在のパスワードを入力してください)
+    %br/
+    = f.password_field :current_password, autocomplete: "off"
+  .field
+    = f.label :sex, '性別'
+    %br/
+    = f.select :sex, User.sex.options
+  .field
+    = f.label :birth_date, '生年月日'
+    %br/
+    = f.date_field :birth_date
+  .field
+    = f.label :zip_code, '郵便番号'
+    %br/
+    = f.number_field :zip_code
+  .actions
+    = f.submit "Update"
+%h3 Cancel my account
+%p
+  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
+= link_to "Back", :back

@@ -1,0 +1,10 @@
+= form_for @recipe.tukurepos.build, url: recipe_tukurepos_path(@recipe), html: { multipart: true}, remote: true do |f|
+  = token_tag
+  .form-group
+    = f.file_field :image
+    %span(class="help-block")
+  .form-group
+    = f.text_area :message, rows: 3, placeholder: 'メッセージを入力してください', class: 'form-control'
+    %span(class="help-block")
+  .actions
+    = f.submit '送信する', class: 'btn btn-default'

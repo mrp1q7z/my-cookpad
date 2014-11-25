@@ -1,0 +1,19 @@
+%h1 Listing email_magazines
+
+%table
+  %tr
+    %th Title
+    %th
+    %th
+    %th
+
+  - @email_magazines.each do |email_magazine|
+    %tr
+      %td= email_magazine.title
+      %td= link_to 'Show', email_magazine
+      %td= link_to 'Edit', edit_email_magazine_path(email_magazine)
+      %td= link_to 'Destroy', email_magazine, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Email magazine', new_email_magazine_path
