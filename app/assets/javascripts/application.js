@@ -17,4 +17,3 @@
 //= require jquery_nested_form
 //
 //= require recipes
-//= require tukurepos
