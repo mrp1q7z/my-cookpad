@@ -1,35 +1,47 @@
-.recipe_show_wrapper
-  - if @recipe.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@recipe.errors.count, "error")} prohibited this recipe from being saved:"
-      %ul
-        - @recipe.errors.full_messages.each do |msg|
-          %li= msg
+.container
+  .row
+    .col-12
+      = render 'errors'
 
-  %h1= @recipe.title
-  .field
-    = image_tag @recipe.image.url(:medium)
-  .field
-    = @recipe.catch_copy
+  .row
+    .col-md-8
+      %h1.text-success= @recipe.title
 
-  %h2 材料
-  .field
-    - @recipe.ingredients.each do |ingredient|
-      = ingredient.title
-      = ingredient.quantity
+  .row
+    .col-md-3
+      = image_tag @recipe.image.url(:medium)
 
-  %h2 手順
-  - @recipe.directions.each do |direction|
-    .field
-      = direction.order
-      = image_tag direction.image.url(:medium) if direction.image?
-      = direction.description
+    .col-md-5
+      = @recipe.catch_copy
 
-  %h2 つくれぽ
-  #tukurepos
-    = render @recipe.tukurepos
+      %h4 材料
+      %ul.list-group
+      - @recipe.ingredients.each do |ingredient|
+        %li.list-group-item
+          %span= ingredient.title
+          %span.badge= ingredient.quantity
 
-  = link_to 'つくれぽを送る', '#new_tukurepo_modal', 'data-toggle' => 'modal'
+  .row
+    .col-md-8
+      %h4 作り方
+      - @recipe.directions.each do |direction|
+        .direction
+          %dl
+            %dt
+              %h4= direction.order
+            %dd
+              %div= image_tag direction.image.url(:medium) if direction.image?
+              %p= direction.description
+
+  .row
+    .col-md-8
+      %h4 みんなのつくりましたフォトレポート「つくれぽ」（#{@recipe.tukurepos.count}件）
+      - @recipe.tukurepos.limit(4).each do |tukurepo|
+        = render tukurepo
+
+      .text-center= link_to "もっと見る（#{@recipe.tukurepos.count}件）" if @recipe.tukurepos.count > 4
+
+      .text-center= link_to 'つくれぽを送る', '#new_tukurepo_modal', 'data-toggle' => 'modal', class: 'btn btn-primary'
 
 #new_tukurepo_modal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
   .modal-dialog

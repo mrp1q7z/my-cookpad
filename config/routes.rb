@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :email_magazines
   resources :recipes do
     member do
-      delete 'image'
+      delete 'delete_image'
       patch 'publish'
     end
     resources 'tukurepos', only: [:create, :show]

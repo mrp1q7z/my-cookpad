@@ -1,3 +1,6 @@
-.tukurepo
-  = image_tag tukurepo.image.url(:medium) if tukurepo.image?
-  = tukurepo.message
+.col-md-3
+  .panel.panel-default
+    .panel-body
+      %dl
+        %dt= image_tag tukurepo.image.url(:medium) if tukurepo.image?
+        %dd= tukurepo.message

@@ -14,7 +14,7 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :tukurepos, allow_destroy: true,
     reject_if: proc { |attributes| attributes['message'].blank? }
 
-  has_attached_file :image, styles: { medium: "420x280>", thumb: "210x140>" },
+  has_attached_file :image, styles: { medium: "280x420>", thumb: "140x210>" },
     default_url: "no-image.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 

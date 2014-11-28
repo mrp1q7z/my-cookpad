@@ -1,0 +1,22 @@
+#edit_direction_modal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close(type="button" data-dismiss="modal" aria-hidden="true") &times;
+        %h4#myModalLabel.modal-title 材料
+      .modal-body
+        = nested_form_for @recipe, html: { multipart: true } do |f|
+          = f.fields_for :ingredients do |ff|
+            .field
+              - i = ff.options[:child_index]
+              = ff.text_field :title, placeholder: ingredients_title_example(i)
+              = ff.text_field :quantity, placeholder: ingredients_quantity_example(i)
+              = ff.link_to_remove "削除"
+          %p= f.link_to_add "行を追加する", :ingredients
+          .panel.panel-default
+            .panel-body
+              %p.text-warning 分かりやすい分量で、みんながおいしく作れるレシピに！
+              %p.text-warning 例：適量 → 小さじ1
+          = f.submit '保存して閉じる'
+      .modal-footer
+        %button.btn.btn-default(type="button" data-dismiss="modal") Close

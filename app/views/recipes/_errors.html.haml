@@ -1,0 +1,5 @@
+- if @recipe.errors.any?
+  #error_explanation.alert-warning
+    %h4= pluralize(@recipe.errors.count, "error")
+    - @recipe.errors.full_messages.each do |msg|
+      %p= msg
