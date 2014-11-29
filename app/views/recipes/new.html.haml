@@ -1,16 +1,13 @@
-%h1 レシピをのせる
+.container
+  .row
+    .col-md-8
+      %h1 レシピをのせる
 
-= form_for @recipe do |f|
-  - if @recipe.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@recipe.errors.count, "error")} prohibited this recipe from being saved:"
-      %ul
-        - @recipe.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :title, 'レシピのタイトル'
-    = f.text_field :title
-  %p #{link_to '掲載するレシピのガイドライン'} を読んで理解しました
-  .actions
-    = f.submit '材料・作り方の入力に進む'
+      = form_for @recipe do |f|
+        = render 'errors'
+        .field
+          = f.label :title, 'レシピのタイトル（※あとから変更できます）'
+          = f.text_field :title, size: 80
+        %p #{link_to '掲載するレシピのガイドライン'} を読んで理解しました
+        .actions
+          = f.submit '材料・作り方の入力に進む'
