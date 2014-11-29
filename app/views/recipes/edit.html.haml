@@ -3,72 +3,47 @@
     .col-12
       =render 'errors'
 
-  = nested_form_for @recipe, html: { multipart: true } do |f|
-    .row
-      .col-md-8
-        %h1.text-success= @recipe.title
-    .row
-      .col-md-3
-        - if @recipe.image?
-          = link_to '画像を削除', delete_image_recipe_path, method: :delete, data: { confirm: '削除した写真は元に戻すことができません。本当に削除しますか？'} if @recipe.image?
-          = image_tag @recipe.image.url(:medium)
-        - else
-          = f.file_field :image
-      .col-md-5
-        = f.text_area :catch_copy, rows: 3, placeholder: 'このレシピのキャッチコピーを入力（検索結果にも表示されます）'
+  .row
+    .col-md-8
+      %h1.text-success.recipe_title_text= @recipe.title
+      = render 'recipe_title_form', recipe: @recipe
+  .row
+    .col-md-3
+      - if @recipe.image?
+        = link_to '画像を削除', delete_image_recipe_path, method: :delete, data: { confirm: '削除した写真は元に戻すことができません。本当に削除しますか？' } if @recipe.image?
+      - else
+        = render 'recipe_image_form', recipe: @recipe
+      = image_tag @recipe.image.url(:medium)
+    .col-md-5
+      %p.catch_copy_text= br(@recipe.catch_copy) || 'クリックしてキャッチコピーを入力'
+      = render 'catch_copy_form', recipe: @recipe
 
-        #ingredients
-          %h4 材料
-          %ul
-            - @recipe.ingredients.each do |ingredient|
-              %li
-                %span= ingredient.title
-                %span.badge= ingredient.quantity
+      #ingredients
+        %h4 材料
+        %ul
+          - @recipe.ingredients.each do |ingredient|
+            %li
+              %span= ingredient.title
+              %span.badge= ingredient.quantity
 
-        -#
-          %h2 材料
-          = f.fields_for :ingredients do |ff|
-            .field
-              - i = ff.options[:child_index]
-              = ff.text_field :title, placeholder: ingredients_title_example(i)
-              = ff.text_field :quantity, placeholder: ingredients_quantity_example(i)
-              = ff.link_to_remove "削除"
-          %p= f.link_to_add "行を追加する", :ingredients
-
-    -#
-      .row
-        .col-md-8
-          %h4 作り方
-          .directions
-            = f.fields_for :directions do |ff|
-              = ff.link_to_remove "削除"
-              %dl
-                %dt
-                  %h4= ff.number_field :order, class: 'direction_order'
-                %dd
-                  - if ff.object.image?
-                    = image_tag ff.object.image.url(:medium)
-                  - else
-                    = ff.file_field :image
-                  = ff.text_field :description
-          = f.link_to_add "追加", :directions
-
-    .row
-      .col-md-8
-        %h4 作り方
-        - @recipe.directions.each do |direction|
-          .direction
-            %dl
-              %dt
-                %h4= direction.order
-              %dd
+  .row
+    .col-md-8
+      %h4 作り方
+      - @recipe.directions.sort_by{|d| d.step}.each_with_index do |direction, index|
+        .direction
+          %dl
+            %dt
+              %h4= direction.step
+              = link_to '削除', recipe_direction_path(direction.recipe_id, direction.id), method: :delete, data: { confirm: 'この作り方を削除しますか？' } if direction.id
+              = link_to '追加', recipe_directions_path(direction.recipe_id, step: direction.step), method: :post
+            %dd
+              - if direction.image?
                 %div= image_tag direction.image.url(:medium) if direction.image?
-                %p.direction_text= direction.description
-                = render 'direction_dialog', direction_order: direction.order
-
-        .actions
-          = f.submit
+              - else
+                = render 'direction_image_form', direction: direction
+              %p.direction_text(data-index="#{index}")= br(direction.description) || 'クリックして作り方を入力'
+              = render 'direction_text_form', direction: direction
 
     = link_to 'レシピを公開', publish_recipe_path, method: :patch, data: { confirm: 'レシピを公開します。よろしいですか？'}
 
-= render 'ingredient_dialog'
+= render 'ingredients_form', recipe: @recipe

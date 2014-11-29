@@ -5,7 +5,8 @@ Rails.application.routes.draw do
       delete 'delete_image'
       patch 'publish'
     end
-    resources 'tukurepos', only: [:create, :show]
+    resources 'directions', only: [:create, :update, :destroy]
+    resources 'tukurepos', only: [:create]
   end
 
   devise_for :users, controllers: {

@@ -1,6 +1,15 @@
 // Place all the styles related to the recipes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.recipe_title_form {
+  display: none;
+}
+.catch_copy_form {
+  display: none;
+}
+.direction_text_form {
+  display: none;
+}
 div.direction {
 	width: 170px;
 	padding: 0 5px;
@@ -10,17 +19,3 @@ div.direction {
 	display: -moz-inline-box;
 	display: inline-block;
 }
-.direction_form {
-  display: none;
-}
-/*
-.directions div {
-	width: 170px;
-	padding: 0 5px;
-	margin: 0 2px 2px 0;
-	text-align: left;
-	vertical-align: top;
-	display: -moz-inline-box;
-	display: inline-block;
-}
-*/

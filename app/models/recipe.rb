@@ -25,9 +25,13 @@ class Recipe < ActiveRecord::Base
       3.times { self.ingredients.build }
     end
 
-    start_direction = self.directions.count + 1
-    (start_direction..4).each do |i|
-      self.directions.build(order: i)
+    if self.directions.empty?
+      (1..4).each { |i| self.directions.create(step: i) }
     end
+
+    #steps = self.directions.pluck(:step)
+    #(1..4).each do |i|
+    #  self.directions.build(step: i) unless steps.include?(i)
+    #end
   end
 end

@@ -1,0 +1,5 @@
+.recipe_title_form
+  = form_for recipe do |f|
+    = f.text_field :title
+    = f.submit '保存'
+    = link_to '取消', "javascript:void(0)", { class: 'edit_recipe_title_text_cancel' }

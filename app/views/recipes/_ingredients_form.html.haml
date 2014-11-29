@@ -1,11 +1,11 @@
-#edit_direction_modal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+#ingredients_form.modal.fade(tabindex="-1" role="dialog" aria-labelledby="ingredients_form" aria-hidden="true")
   .modal-dialog
     .modal-content
       .modal-header
         %button.close(type="button" data-dismiss="modal" aria-hidden="true") &times;
-        %h4#myModalLabel.modal-title 材料
+        %h4.modal-title 材料
       .modal-body
-        = nested_form_for @recipe, html: { multipart: true } do |f|
+        = nested_form_for recipe do |f|
           = f.fields_for :ingredients do |ff|
             .field
               - i = ff.options[:child_index]

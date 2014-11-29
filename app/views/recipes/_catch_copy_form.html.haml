@@ -1,0 +1,6 @@
+.catch_copy_form
+  = form_for recipe do |f|
+    = f.text_area :catch_copy, rows: 3, placeholder: 'このレシピのキャッチコピーを入力（検索結果にも表示されます）'
+    .actions
+      = f.submit '保存'
+      = link_to '取消', "javascript:void(0)", { class: 'edit_catch_copy_text_cancel' }

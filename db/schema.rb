@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141123064354) do
+ActiveRecord::Schema.define(version: 20141128050944) do
 
   create_table "directions", force: true do |t|
     t.integer  "recipe_id"
     t.string   "description"
-    t.integer  "order"
+    t.integer  "step"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"
