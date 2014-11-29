@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'kitchen/:id', to: 'kitchen#show', as: 'ketchen'
+
   resources :email_magazines
   resources :recipes do
     member do

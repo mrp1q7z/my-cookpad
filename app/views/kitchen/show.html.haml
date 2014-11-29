@@ -1,0 +1,14 @@
+.container
+  .row
+    .col-md-8
+      %h1 #{@nickname}’s キッチン
+
+      %h2 レシピ一覧
+      %ul
+        - @recipes.each do |recipe|
+          %li= link_to recipe.title, recipe
+
+      %h2 つくれぽ一覧
+      %ul
+        - @tukurepos.each do |tukurepo|
+          %li= link_to tukurepo.message, recipe_path(tukurepo.recipe_id)
