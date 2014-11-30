@@ -44,6 +44,8 @@
               %p.direction_text(data-index="#{index}")= br(direction.description) || 'クリックして作り方を入力'
               = render 'direction_text_form', direction: direction
 
-    = link_to 'レシピを公開', publish_recipe_path, method: :patch, data: { confirm: 'レシピを公開します。よろしいですか？'}
+  .row
+    .col-md-8
+      %p= link_to 'レシピを公開', publish_recipe_path, method: :patch, class: "btn btn-primary", data: { confirm: 'レシピを公開します。よろしいですか？'}
 
 = render 'ingredients_form', recipe: @recipe

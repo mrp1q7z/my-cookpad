@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :confirmable
+         :omniauthable#, :confirmable テストがしにくいので一時的に無効にする
 
   def default_nickname
     if self.nickname.blank?
