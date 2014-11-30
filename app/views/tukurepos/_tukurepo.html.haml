@@ -2,5 +2,9 @@
   .panel.panel-default
     .panel-body
       %dl
-        %dt= image_tag tukurepo.image.url(:medium) if tukurepo.image?
-        %dd= tukurepo.message
+        %dt
+          = tukurepo.created_at.strftime('%Y/%m/%d')
+          = image_tag tukurepo.image.url(:medium) if tukurepo.image?
+        %dd
+          %p= tukurepo.message
+          %p= link_to tukurepo.user.nickname, kitchen_path(tukurepo.user.id)

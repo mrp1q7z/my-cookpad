@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'kitchen/:id', to: 'kitchen#show', as: 'ketchen'
+  get 'kitchen/:id', to: 'kitchen#show', as: 'kitchen'
 
   resources :email_magazines
   resources :recipes do
