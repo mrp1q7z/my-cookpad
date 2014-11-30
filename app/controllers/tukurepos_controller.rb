@@ -1,6 +1,7 @@
 class TukureposController < ApplicationController
   def create
-    @tukurepo = Recipe.find(params[:recipe_id]).tukurepos.build(tukurepo_params)
+    @tukurepo = current_user.tukurepos.build(tukurepo_params)
+    @tukurepo.recipe_id = params[:recipe_id]
     @tukurepo.save!
     redirect_to recipe_path(params[:recipe_id])
   end

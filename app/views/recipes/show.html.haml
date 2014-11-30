@@ -36,12 +36,16 @@
   .row
     .col-md-8
       %h4 みんなのつくりましたフォトレポート「つくれぽ」（#{@recipe.tukurepos.count}件）
-      - @recipe.tukurepos.limit(4).each do |tukurepo|
+      - @recipe.tukurepos.last(4).each do |tukurepo|
         = render tukurepo
 
-      .text-center= link_to "もっと見る（#{@recipe.tukurepos.count}件）" if @recipe.tukurepos.count > 4
+  .row
+    .col-md-8
+      %p.text-center= link_to "もっと見る（#{@recipe.tukurepos.count}件）" if @recipe.tukurepos.count > 4
 
-      .text-center= link_to 'つくれぽを送る', '#new_tukurepo_modal', 'data-toggle' => 'modal', class: 'btn btn-primary'
+  .row
+    .col-md-8
+      %p.text-center= link_to 'つくれぽを送る', '#new_tukurepo_modal', 'data-toggle' => 'modal', class: 'btn btn-primary'
 
 #new_tukurepo_modal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
   .modal-dialog
@@ -50,6 +54,6 @@
         %button.close(type="button" data-dismiss="modal" aria-hidden="true") &times;
         %h4#myModalLabel.modal-title #{@recipe.title} へのつくれぽ
       .modal-body
-        = render 'form_tukurepo'
+        = render 'tukurepos/tukurepo_form'
       .modal-footer
         %button.btn.btn-default(type="button" data-dismiss="modal") Close
