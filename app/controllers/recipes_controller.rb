@@ -1,10 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:edit, :update, :delete_image, :publish]
 
-  def index
-    @recipes = Recipe.all
-  end
-
   def new
     @recipe = current_user.recipes.build
   end
@@ -53,6 +49,11 @@ class RecipesController < ApplicationController
     end
   end
 
+  def search
+    @keywords = format_keywords(params[:search]) || 'すべて'
+    @recipes = Recipe.keywords_search(params[:search]).published
+  end
+
   private
 
   def set_recipe
@@ -63,5 +64,12 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(:image, :title, :catch_copy,
       ingredients_attributes: [:id, :title, :quantity, :_destroy],
       directions_attributes: [:id, :step, :image, :description, :_destroy])
+  end
+
+  def format_keywords(keywords)
+    tokens = keywords.split(/[[:space:]]/)
+    tokens = tokens.delete_if { |token| token.empty? }
+    tokens = tokens.join(' ')
+    tokens.presence
   end
 end

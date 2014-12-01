@@ -19,6 +19,16 @@ class Recipe < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   scope :published, -> { where(status: :published) }
+  scope :keywords_search, ->(keywords) {
+    tokens = keywords.split(/[[:space:]]/)
+    tokens = tokens.delete_if { |token| token.empty? }
+    tokens = tokens.map { |token| "%#{token}%" }
+    if tokens.present?
+      recipes = Recipe.where((['( title || catch_copy like ? )'] * tokens.size).join(' OR '),
+                            *tokens.map { |token| [token] * 1 }.flatten)
+    end
+    recipes
+  }
 
   def build_child_items
     if self.ingredients.empty?

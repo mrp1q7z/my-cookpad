@@ -2,13 +2,14 @@ Rails.application.routes.draw do
   get 'kitchen/:id', to: 'kitchen#show', as: 'kitchen'
 
   resources :email_magazines
-  resources :recipes do
+  resources :recipes, only: [:new, :create, :edit, :show, :update] do
     member do
-      delete 'delete_image'
-      patch 'publish'
+      delete :delete_image
+      patch :publish
     end
-    resources 'directions', only: [:create, :update, :destroy]
-    resources 'tukurepos', only: [:create]
+    post :search, on: :collection
+    resources :directions, only: [:create, :update, :destroy]
+    resources :tukurepos, only: [:create]
   end
 
   devise_for :users, controllers: {
