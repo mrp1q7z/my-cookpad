@@ -11,3 +11,5 @@
         %h4= link_to recipe.title, recipe
         %p= recipe.catch_copy
     %br
+
+  = paginate @recipes, params: { contoller: 'recipe', action: 'search' }

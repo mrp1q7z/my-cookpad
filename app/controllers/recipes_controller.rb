@@ -51,7 +51,7 @@ class RecipesController < ApplicationController
 
   def search
     @keywords = format_keywords(params[:search]) || 'すべて'
-    @recipes = Recipe.keywords_search(params[:search]).published
+    @recipes = Recipe.keywords_search(params[:search]).published.page(params[:page]).per(3)
   end
 
   private

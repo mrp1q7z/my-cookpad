@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @recipes = Recipe.published.all
+    @recipes = Recipe.published.page(params[:page])
   end
 end

@@ -14,3 +14,7 @@
             %dd
               %p= link_to recipe.title, recipe
               %p by #{link_to recipe.user.nickname, kitchen_path(recipe.user.id)}
+
+  .row
+    .col-md-8
+      = paginate @recipes

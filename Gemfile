@@ -49,6 +49,7 @@ gem 'nested_form'
 gem 'paperclip'
 gem 'twitter-bootstrap-rails'
 gem 'less-rails'
+gem 'kaminari'
 
 group :test do
   gem 'rspec-rails'
