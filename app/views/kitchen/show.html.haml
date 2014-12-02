@@ -6,7 +6,9 @@
       %h2 レシピ一覧
       %ul
         - @recipes.each do |recipe|
-          %li= link_to recipe.title, recipe.user == current_user ? edit_recipe_path(recipe) : recipe
+          %li
+            = link_to recipe.title, recipe.user == current_user ? edit_recipe_path(recipe) : recipe
+            %span.badge= '下書き' if recipe.status.draft?
 
       %h2 つくれぽ一覧
       %ul
