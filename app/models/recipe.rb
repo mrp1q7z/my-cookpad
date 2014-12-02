@@ -38,10 +38,5 @@ class Recipe < ActiveRecord::Base
     if self.directions.empty?
       (1..4).each { |i| self.directions.create(step: i) }
     end
-
-    #steps = self.directions.pluck(:step)
-    #(1..4).each do |i|
-    #  self.directions.build(step: i) unless steps.include?(i)
-    #end
   end
 end
