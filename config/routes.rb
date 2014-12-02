@@ -8,7 +8,12 @@ Rails.application.routes.draw do
       patch :publish
     end
     get :search, on: :collection
-    resources :directions, only: [:create, :update, :destroy]
+    resources :directions, only: [:create, :update, :destroy] do
+      member do
+        patch :move_highter
+        patch :move_lower
+      end
+    end
     resources :tukurepos, only: [:create]
   end
 

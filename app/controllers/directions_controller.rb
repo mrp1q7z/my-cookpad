@@ -1,5 +1,5 @@
 class DirectionsController < ApplicationController
-  before_action :set_direction, only: [:update, :destroy]
+  before_action :set_direction, only: [:update, :destroy, :move_highter, :move_lower]
 
   def create
     step = params[:step].to_i + 1
@@ -15,6 +15,16 @@ class DirectionsController < ApplicationController
 
   def destroy
     @direction.destroy!
+    redirect_to edit_recipe_url(@direction.recipe_id)
+  end
+
+  def move_highter
+    @direction.move(:higher)
+    redirect_to edit_recipe_url(@direction.recipe_id)
+  end
+
+  def move_lower
+    @direction.move(:lower)
     redirect_to edit_recipe_url(@direction.recipe_id)
   end
 
