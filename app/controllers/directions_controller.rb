@@ -20,12 +20,14 @@ class DirectionsController < ApplicationController
 
   def move_highter
     @direction.move(:higher)
-    redirect_to edit_recipe_url(@direction.recipe_id)
+    @directions = Recipe.find(params[:recipe_id]).directions
+    render :directions
   end
 
   def move_lower
     @direction.move(:lower)
-    redirect_to edit_recipe_url(@direction.recipe_id)
+    @directions = Recipe.find(params[:recipe_id]).directions
+    render :directions
   end
 
   private

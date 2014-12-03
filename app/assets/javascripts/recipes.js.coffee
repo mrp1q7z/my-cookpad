@@ -47,26 +47,23 @@ ready = ->
   $('#ingredients').on 'click', ->
     $("#ingredients_form").modal('show')
 
-  # 作り方にマウスオーバーで色をかえる
-  $(".direction_text").hover ->
-    $(@).css "background-color", "#fc6"
-  , ->
-    $(@).css "background-color", "#fff"
-
-  # 作り方をクリックしたら入力フォームを出す
-  $('.direction_text').on 'click', ->
-    $('.direction_text_form').hide()
-    $('.direction_text').show()
-    $(@).hide()
-    $(@).next('.direction_text_form').show()
-    # TODO: 追加してID順でなくなるとうまく選択されない
-    textarea = '#recipe_directions_attributes_' + $(@).data("index") + '_description'
-    $(textarea).select().focus()
-
-  # 作り方の入力フォームのキャンセル
-  $('.edit_direction_text_cancel').on 'click', ->
-    $('.direction_text_form').hide()
-    $('.direction_text').show()
-
 $(document).ready ready
 $(document).on "page:load", ready
+$(document).on 'mouseenter', ".direction_text", ->
+  $(@).css "background-color", "#fc6"
+
+$(document).on 'mouseleave', ".direction_text", ->
+  $(@).css "background-color", "#fff"
+
+$(document).on 'click', ".direction_text", ->
+  $('.direction_text_form').hide()
+  $('.direction_text').show()
+  $(@).hide()
+  $(@).next('.direction_text_form').show()
+  # TODO: 追加してID順でなくなるとうまく選択されない
+  textarea = '#recipe_directions_attributes_' + $(@).data("index") + '_description'
+  $(textarea).select().focus()
+
+$(document).on 'click', ".edit_direction_text_cancel", ->
+  $('.direction_text_form').hide()
+  $('.direction_text').show()

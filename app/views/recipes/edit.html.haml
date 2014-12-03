@@ -29,23 +29,7 @@
   .row
     .col-md-8
       %h4 作り方
-      - @recipe.directions.sort_by{|d| d.step}.each_with_index do |direction, index|
-        .direction
-          %dl
-            %dt
-              %h4
-                = direction.step
-                %span= link_to '←', move_highter_recipe_direction_path(direction.recipe_id, direction.id), method: :patch
-                %span= link_to '→', move_lower_recipe_direction_path(direction.recipe_id, direction.id), method: :patch
-              = link_to '削除', recipe_direction_path(direction.recipe_id, direction.id), method: :delete, data: { confirm: 'この作り方を削除しますか？' } if direction.id
-              = link_to '追加', recipe_directions_path(direction.recipe_id, step: direction.step), method: :post
-            %dd
-              - if direction.image?
-                %div= image_tag direction.image.url(:medium) if direction.image?
-              - else
-                = render 'direction_image_form', direction: direction
-              %p.direction_text(data-index="#{index}")= br(direction.description) || 'クリックして作り方を入力'
-              = render 'direction_text_form', direction: direction
+      = render 'directions/directions', directions: @recipe.directions
 
   .row
     .col-md-8
