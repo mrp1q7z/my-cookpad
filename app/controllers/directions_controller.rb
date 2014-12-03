@@ -5,17 +5,20 @@ class DirectionsController < ApplicationController
     step = params[:step].to_i + 1
     @direction = Recipe.find(params[:recipe_id]).directions.build(step: step)
     @direction.save_and_reorder
-    redirect_to edit_recipe_url(@direction.recipe_id)
+    @directions = Recipe.find(params[:recipe_id]).directions
+    render :directions
   end
 
   def update
     @direction.update!(direction_params)
-    redirect_to edit_recipe_url(@direction.recipe_id)
+    @directions = Recipe.find(params[:recipe_id]).directions
+    render :directions
   end
 
   def destroy
     @direction.destroy!
-    redirect_to edit_recipe_url(@direction.recipe_id)
+    @directions = Recipe.find(params[:recipe_id]).directions
+    render :directions
   end
 
   def move_highter
