@@ -12,7 +12,10 @@ class DirectionsController < ApplicationController
   def update
     @direction.update!(direction_params)
     @directions = Recipe.find(params[:recipe_id]).directions
-    render :directions
+    respond_to do |format|
+      format.html { redirect_to edit_recipe_path(@direction.recipe_id) }
+      format.js { render :directions }
+    end
   end
 
   def destroy

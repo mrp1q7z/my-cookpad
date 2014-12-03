@@ -46,6 +46,18 @@ $(document).on 'click', ".edit_catch_copy_text_cancel", ->
     $('.catch_copy_form').hide()
     $('.catch_copy_text').show()
 
+$(document).on 'mouseenter', ".direction_image_upload", ->
+  $(@).css "background-color", "#fc6"
+
+$(document).on 'mouseleave', ".direction_image_upload", ->
+  $(@).css "background-color", "#fff"
+
+$(document).on 'click', ".direction_image_upload", ->
+  uploader = "#direction_image_" + $(@).data("direction_id")
+  $(uploader).trigger "click"
+  $(uploader).change ->
+    $(@).next(':submit').trigger "click"
+
 $(document).on 'mouseenter', ".direction_text", ->
   $(@).css "background-color", "#fc6"
 
