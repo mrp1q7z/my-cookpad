@@ -13,7 +13,7 @@
         = link_to '画像を削除', delete_image_recipe_path, method: :delete, data: { confirm: '削除した写真は元に戻すことができません。本当に削除しますか？' } if @recipe.image?
       - else
         = render 'recipe_image_form', recipe: @recipe
-      = image_tag @recipe.image.url(:medium)
+      = image_tag @recipe.image.url(:medium), id: 'recipe_image_upload'
     .col-md-5
       = render 'catch_copy', recipe: @recipe
 

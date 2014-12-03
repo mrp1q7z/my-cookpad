@@ -64,3 +64,8 @@ $(document).on 'click', ".direction_text", ->
 $(document).on 'click', ".edit_direction_text_cancel", ->
   $('.direction_text_form').hide()
   $('.direction_text').show()
+
+$(document).on 'click', "#recipe_image_upload", ->
+  $("#recipe_image").trigger "click"
+  $("#recipe_image").change ->
+    $(@).next(':submit').trigger "click"
