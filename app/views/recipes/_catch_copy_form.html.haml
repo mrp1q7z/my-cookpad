@@ -1,5 +1,5 @@
 .catch_copy_form
-  = form_for recipe do |f|
+  = form_for recipe, remote: true do |f|
     = f.text_area :catch_copy, rows: 3, placeholder: 'このレシピのキャッチコピーを入力（検索結果にも表示されます）'
     .actions
       = f.submit '保存'

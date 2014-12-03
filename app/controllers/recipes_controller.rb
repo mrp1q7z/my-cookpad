@@ -25,6 +25,7 @@ class RecipesController < ApplicationController
     respond_to do |format|
       if @recipe.update(recipe_params)
         format.html { redirect_to edit_recipe_path(@recipe) }
+        format.js
       else
         format.html { render :edit }
       end

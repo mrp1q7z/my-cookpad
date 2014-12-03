@@ -5,8 +5,8 @@
 
   .row
     .col-md-8
-      %h1.text-success.recipe_title_text= @recipe.title
-      = render 'recipe_title_form', recipe: @recipe
+      = render 'recipe_title', recipe: @recipe
+
   .row
     .col-md-3
       - if @recipe.image?
@@ -15,8 +15,7 @@
         = render 'recipe_image_form', recipe: @recipe
       = image_tag @recipe.image.url(:medium)
     .col-md-5
-      %p.catch_copy_text= br(@recipe.catch_copy) || 'クリックしてキャッチコピーを入力'
-      = render 'catch_copy_form', recipe: @recipe
+      = render 'catch_copy', recipe: @recipe
 
       #ingredients
         %h4 材料

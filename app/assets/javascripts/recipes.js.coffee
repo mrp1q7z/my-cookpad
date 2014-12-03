@@ -3,40 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 ready = ->
-  # レシピタイトルにマウスオーバーで色をかえる
-  $(".recipe_title_text").hover ->
-    $(this).css "background-color", "#fc6"
-  , ->
-    $(this).css "background-color", "#fff"
-
-  # レシピをクリックしたら入力フォームを出す
-  $('.recipe_title_text').on 'click', ->
-    $(@).hide()
-    $(@).next('.recipe_title_form').show()
-    $('#recipe_title').select().focus()
-
-  # レシピの入力フォームのキャンセル
-  $('.edit_recipe_title_text_cancel').on 'click', ->
-    $('.recipe_title_form').hide()
-    $('.recipe_title_text').show()
-
-  # キャッチコピーにマウスオーバーで色をかえる
-  $(".catch_copy_text").hover ->
-    $(this).css "background-color", "#fc6"
-  , ->
-    $(this).css "background-color", "#fff"
-
-  # キャッチコピーをクリックしたら入力フォームを出す
-  $('.catch_copy_text').on 'click', ->
-    $(@).hide()
-    $(@).next('.catch_copy_form').show()
-    $('#recipe_catch_copy').select().focus()
-
-  # キャッチコピーの入力フォームのキャンセル
-  $('.edit_catch_copy_text_cancel').on 'click', ->
-    $('.catch_copy_form').hide()
-    $('.catch_copy_text').show()
-
   # 材料にマウスオーバーで色をかえる
   $("#ingredients").hover ->
     $(this).css "background-color", "#fc6"
@@ -49,6 +15,37 @@ ready = ->
 
 $(document).ready ready
 $(document).on "page:load", ready
+
+$(document).on 'mouseenter', ".recipe_title_text", ->
+  $(this).css "background-color", "#fc6"
+
+$(document).on 'mouseleave', ".recipe_title_text", ->
+    $(this).css "background-color", "#fff"
+
+$(document).on 'click', ".recipe_title_text", ->
+    $(@).hide()
+    $(@).next('.recipe_title_form').show()
+    $('#recipe_title').select().focus()
+
+$(document).on 'click', ".edit_recipe_title_text_cancel", ->
+    $('.recipe_title_form').hide()
+    $('.recipe_title_text').show()
+
+$(document).on 'mouseenter', ".catch_copy_text", ->
+    $(this).css "background-color", "#fc6"
+
+$(document).on 'mouseleave', ".catch_copy_text", ->
+    $(this).css "background-color", "#fff"
+
+$(document).on 'click', ".catch_copy_text", ->
+    $(@).hide()
+    $(@).next('.catch_copy_form').show()
+    $('#recipe_catch_copy').select().focus()
+
+$(document).on 'click', ".edit_catch_copy_text_cancel", ->
+    $('.catch_copy_form').hide()
+    $('.catch_copy_text').show()
+
 $(document).on 'mouseenter', ".direction_text", ->
   $(@).css "background-color", "#fc6"
 
