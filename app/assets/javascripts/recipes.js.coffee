@@ -31,20 +31,20 @@ $(document).on 'click', "#cancel_recipe_title_form", ->
     $('#recipe_title_form').hide()
     $('#recipe_title_text').show()
 
-$(document).on 'mouseenter', ".catch_copy_text", ->
+$(document).on 'mouseenter', "#catch_copy_text", ->
     $(this).css "background-color", "#fc6"
 
-$(document).on 'mouseleave', ".catch_copy_text", ->
+$(document).on 'mouseleave', "#catch_copy_text", ->
     $(this).css "background-color", "#fff"
 
-$(document).on 'click', ".catch_copy_text", ->
+$(document).on 'click', "#catch_copy_text", ->
     $(@).hide()
-    $(@).next('.catch_copy_form').show()
+    $('#catch_copy_form').show()
     $('#recipe_catch_copy').select().focus()
 
-$(document).on 'click', ".edit_catch_copy_text_cancel", ->
-    $('.catch_copy_form').hide()
-    $('.catch_copy_text').show()
+$(document).on 'click', "#cancel_catch_copy_form", ->
+    $('#catch_copy_form').hide()
+    $('#catch_copy_text').show()
 
 $(document).on 'mouseenter', ".direction_image_upload", ->
   $(@).css "background-color", "#fc6"
