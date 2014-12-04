@@ -20,31 +20,31 @@ $(document).on 'mouseenter', "#recipe_title_text", ->
   $(this).css "background-color", "#fc6"
 
 $(document).on 'mouseleave', "#recipe_title_text", ->
-    $(this).css "background-color", "#fff"
+  $(this).css "background-color", "#fff"
 
 $(document).on 'click', "#recipe_title_text", ->
-    $(@).hide()
-    $('#recipe_title_form').show()
-    $('#recipe_title').select().focus()
+  $(@).hide()
+  $('#recipe_title_form').show()
+  $('#recipe_title').select().focus()
 
 $(document).on 'click', "#cancel_recipe_title_form", ->
-    $('#recipe_title_form').hide()
-    $('#recipe_title_text').show()
+  $('#recipe_title_form').hide()
+  $('#recipe_title_text').show()
 
 $(document).on 'mouseenter', "#catch_copy_text", ->
-    $(this).css "background-color", "#fc6"
+  $(this).css "background-color", "#fc6"
 
 $(document).on 'mouseleave', "#catch_copy_text", ->
-    $(this).css "background-color", "#fff"
+  $(this).css "background-color", "#fff"
 
 $(document).on 'click', "#catch_copy_text", ->
-    $(@).hide()
-    $('#catch_copy_form').show()
-    $('#recipe_catch_copy').select().focus()
+  $(@).hide()
+  $('#catch_copy_form').show()
+  $('#recipe_catch_copy').select().focus()
 
 $(document).on 'click', "#cancel_catch_copy_form", ->
-    $('#catch_copy_form').hide()
-    $('#catch_copy_text').show()
+  $('#catch_copy_form').hide()
+  $('#catch_copy_text').show()
 
 $(document).on 'mouseenter', ".direction_image_upload", ->
   $(@).css "background-color", "#fc6"

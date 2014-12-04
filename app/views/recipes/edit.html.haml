@@ -2,21 +2,14 @@
   .row
     .col-12
       =render 'errors'
-
   .row
     .col-md-8
       = render 'recipe_title', recipe: @recipe
-
   .row
     .col-md-3
-      - if @recipe.image?
-        = link_to '画像を削除', delete_image_recipe_path, method: :delete, data: { confirm: '削除した写真は元に戻すことができません。本当に削除しますか？' } if @recipe.image?
-      - else
-        = render 'recipe_image_form', recipe: @recipe
-      = image_tag @recipe.image.url(:medium), id: 'recipe_image_upload'
+      = render 'recipe_image', recipe: @recipe
     .col-md-5
       = render 'catch_copy', recipe: @recipe
-
       #ingredients
         %h4 材料
         %ul
@@ -24,12 +17,10 @@
             %li
               %span= ingredient.title
               %span.badge= ingredient.quantity
-
   .row
     .col-md-8
       %h4 作り方
       = render 'directions/directions', directions: @recipe.directions
-
   .row
     .col-md-8
       %p= link_to 'レシピを公開', publish_recipe_path, method: :patch, class: "btn btn-primary", data: { confirm: 'レシピを公開します。よろしいですか？'}

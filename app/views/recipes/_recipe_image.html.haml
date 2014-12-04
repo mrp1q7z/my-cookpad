@@ -1,0 +1,8 @@
+= link_to '画像を削除', delete_image_recipe_path, method: :delete, data: { confirm: '削除した写真は元に戻すことができません。本当に削除しますか？' } if @recipe.image?
+.hide
+  = form_for recipe do |f|
+    = f.file_field :image
+    = f.submit '保存'
+= image_tag @recipe.image.url(:medium), id: 'recipe_image_upload'
+
+
