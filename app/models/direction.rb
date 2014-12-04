@@ -43,6 +43,6 @@ class Direction < ActiveRecord::Base
   private
 
   def reorder_steps
-    Direction.where('step > ?', self.step).update_all('step = step - 1')
+    Direction.where('recipe_id = ? and step > ?', self.recipe_id, self.step).update_all('step = step - 1')
   end
 end
