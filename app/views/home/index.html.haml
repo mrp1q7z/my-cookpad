@@ -7,7 +7,7 @@
   .row
     .col-md-8
       - @recipes.each do |recipe|
-        .recipe
+        .hbox_list
           %dl
             %dt
               .image= link_to image_tag(recipe.image.url(:thumb), size: "140x210"), recipe
