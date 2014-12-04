@@ -69,8 +69,7 @@ $(document).on 'click', ".direction_text", ->
   $('.direction_text').show()
   $(@).hide()
   $(@).next('.direction_text_form').show()
-  # TODO: 追加してID順でなくなるとうまく選択されない
-  textarea = '#recipe_directions_attributes_' + $(@).data("index") + '_description'
+  textarea = '#direction_text_' + $(@).data("direction_id")
   $(textarea).select().focus()
 
 $(document).on 'click', ".edit_direction_text_cancel", ->

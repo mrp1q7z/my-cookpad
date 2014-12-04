@@ -11,5 +11,4 @@
           = link_to '追加', recipe_directions_path(direction.recipe_id, step: direction.step), method: :post, remote: true
         %dd
           = render 'directions/direction_image_form', direction: direction
-          %p.direction_text(data-index="#{index}")= br(direction.description) || 'クリックして作り方を入力'
           = render 'directions/direction_text_form', direction: direction
