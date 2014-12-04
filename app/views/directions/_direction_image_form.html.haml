@@ -1,5 +1,10 @@
 .direction_image_form
-  .direction_image_upload(data-direction_id="#{direction.id}")= direction.image? ? image_tag(direction.image.url(:medium)) : '写真をのせる'
+  .direction_image_upload(data-direction_id="#{direction.id}")
+    - if direction.image?
+      = image_tag(direction.image.url(:medium))
+    - else
+      %div 写真をのせる
+  = link_to '写真を削除', delete_image_recipe_direction_path(direction.recipe_id, direction.id), method: :delete, data: { confirm: '削除した写真は元に戻すことができません。本当に削除しますか？' }, remote: true if direction.image?
   .hide
     = form_for direction, url: recipe_direction_path(direction.recipe_id, direction.id), method: :patch, html: { multipart: true } do |f|
       = f.file_field :image, id: "direction_image_#{direction.id}"

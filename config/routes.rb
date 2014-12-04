@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get :search, on: :collection
     resources :directions, only: [:create, :update, :destroy] do
       member do
+        delete :delete_image
         patch :move_highter
         patch :move_lower
       end

@@ -1,5 +1,5 @@
 class DirectionsController < ApplicationController
-  before_action :set_direction, only: [:update, :destroy, :move_highter, :move_lower]
+  before_action :set_direction, only: [:update, :destroy, :delete_image, :move_highter, :move_lower]
 
   def create
     step = params[:step].to_i + 1
@@ -20,6 +20,13 @@ class DirectionsController < ApplicationController
 
   def destroy
     @direction.destroy!
+    @directions = Recipe.find(params[:recipe_id]).directions
+    render :directions
+  end
+
+  def delete_image
+    @direction.image = nil
+    @direction.save
     @directions = Recipe.find(params[:recipe_id]).directions
     render :directions
   end
