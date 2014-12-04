@@ -2,8 +2,12 @@ class TukureposController < ApplicationController
   def create
     @tukurepo = current_user.tukurepos.build(tukurepo_params)
     @tukurepo.recipe_id = params[:recipe_id]
-    @tukurepo.save!
-    redirect_to recipe_path(params[:recipe_id])
+    if @tukurepo.save
+      redirect_to recipe_path(params[:recipe_id])
+    else
+      redirect_to recipe_path(params[:recipe_id]),
+        alert: @tukurepo.errors.full_messages.join(", ");
+    end
   end
 
   private
