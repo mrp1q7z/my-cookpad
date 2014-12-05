@@ -1,4 +1,6 @@
 class TukureposController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @tukurepo = current_user.tukurepos.build(tukurepo_params)
     if @tukurepo.save

@@ -1,4 +1,5 @@
 class DirectionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_direction, only: [:update, :destroy, :delete_image, :move_highter, :move_lower]
 
   def create

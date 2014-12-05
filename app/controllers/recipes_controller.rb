@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  # TODO: devise_forで権限チェックしなくてもいい？
+  before_action :authenticate_user!, except: [:show, :search]
   before_action :set_recipe, only: [:edit, :update, :delete_image, :publish]
 
   def new
