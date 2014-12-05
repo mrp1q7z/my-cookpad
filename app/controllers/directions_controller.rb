@@ -3,6 +3,7 @@ class DirectionsController < ApplicationController
 
   def create
     step = params[:step].to_i + 1
+    # TODO: directionはビューに渡してないので＠不要
     @direction = Recipe.find(params[:recipe_id]).directions.build(step: step)
     @direction.save_and_reorder
     @directions = Recipe.find(params[:recipe_id]).directions

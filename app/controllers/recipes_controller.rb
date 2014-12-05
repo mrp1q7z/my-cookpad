@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  # TODO: devise_forで権限チェックしなくてもいい？
   before_action :set_recipe, only: [:edit, :update, :delete_image, :publish]
 
   def new
@@ -43,6 +44,7 @@ class RecipesController < ApplicationController
   end
 
   def publish
+    # TODO: pullishというメソッドをモデルにもたせる
     if @recipe.update(status: :published)
       redirect_to @recipe, notice: '公開しました'
     else

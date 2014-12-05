@@ -1,5 +1,6 @@
 class TukureposController < ApplicationController
   def create
+    # TODO: permitでrecipe_idを追加するとrecipe_idを代入しなくていよい？
     @tukurepo = current_user.tukurepos.build(tukurepo_params)
     @tukurepo.recipe_id = params[:recipe_id]
     if @tukurepo.save
