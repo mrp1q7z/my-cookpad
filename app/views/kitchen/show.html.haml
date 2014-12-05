@@ -1,16 +1,17 @@
 .container
   .row
     .col-md-8
-      %h1 #{@nickname}’s キッチン
+      %h1 #{@user.nickname}’s キッチン
 
       %h2 レシピ一覧
       %ul
-        - @recipes.each do |recipe|
+        - recipes = @user == current_user ? @user.recipes : @user.recipes.published
+        - recipes.each do |recipe|
           %li
             = link_to recipe.title, recipe.user == current_user ? edit_recipe_path(recipe) : recipe
             %span.badge= '下書き' if recipe.status.draft?
 
       %h2 つくれぽ一覧
       %ul
-        - @tukurepos.each do |tukurepo|
+        - @user.tukurepos.each do |tukurepo|
           %li= link_to tukurepo.message, recipe_path(tukurepo.recipe_id)
