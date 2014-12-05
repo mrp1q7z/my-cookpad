@@ -24,8 +24,8 @@
   .row
     .col-md-8
       %h4 作り方
-      - @recipe.directions.each do |direction|
-        .direction
+      - @recipe.directions.sort_by{|d| d.step}.each do |direction|
+        .hbox_list
           %dl
             %dt
               %h4= direction.step
