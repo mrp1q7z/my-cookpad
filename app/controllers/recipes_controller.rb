@@ -44,8 +44,7 @@ class RecipesController < ApplicationController
   end
 
   def publish
-    # TODO: pullishというメソッドをモデルにもたせる
-    if @recipe.update(status: :published)
+    if @recipe.publish
       redirect_to @recipe, notice: '公開しました'
     else
       render :edit
