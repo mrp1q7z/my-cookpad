@@ -1,8 +1,6 @@
 class TukureposController < ApplicationController
   def create
-    # TODO: permitでrecipe_idを追加するとrecipe_idを代入しなくていよい？
     @tukurepo = current_user.tukurepos.build(tukurepo_params)
-    @tukurepo.recipe_id = params[:recipe_id]
     if @tukurepo.save
       redirect_to recipe_path(params[:recipe_id])
     else
@@ -14,6 +12,6 @@ class TukureposController < ApplicationController
   private
 
   def tukurepo_params
-    params.require(:tukurepo).permit(:image, :message)
+    params.require(:tukurepo).permit(:image, :message, :recipe_id)
   end
 end
