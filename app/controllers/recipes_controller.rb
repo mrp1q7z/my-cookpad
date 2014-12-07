@@ -52,7 +52,7 @@ class RecipesController < ApplicationController
   end
 
   def search
-    @keywords = format_keywords(params[:search]) || 'すべて'
+    @keywords = params[:search].squish.presence || 'すべて'
     @recipes = Recipe.keywords_search(params[:search]).published.page(params[:page]).per(3)
   end
 
@@ -66,12 +66,5 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(:image, :title, :catch_copy,
       ingredients_attributes: [:id, :title, :quantity, :_destroy],
       directions_attributes: [:id, :step, :image, :description, :_destroy])
-  end
-
-  def format_keywords(keywords)
-    tokens = keywords.split(/[[:space:]]/)
-    tokens = tokens.delete_if { |token| token.empty? }
-    tokens = tokens.join(' ')
-    tokens.presence
   end
 end

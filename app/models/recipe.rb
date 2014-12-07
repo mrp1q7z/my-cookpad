@@ -39,7 +39,7 @@ class Recipe < ActiveRecord::Base
       (1..4).each { |i| self.directions.create(step: i) }
     end
   end
-  
+
   def publish
     self.status = :published
     self.save
