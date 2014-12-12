@@ -6,7 +6,7 @@
   - @recipes.each do |recipe|
     .row
       .col-md-2
-        = link_to image_tag(recipe.image.url(:thumb), size: "105x168"), recipe
+        = link_to image_tag(recipe.authenticated_image_url(:thumb), size: "105x168"), recipe
       .col-md-6
         %h4= link_to recipe.title, recipe
         %p= recipe.catch_copy

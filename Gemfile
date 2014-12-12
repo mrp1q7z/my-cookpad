@@ -56,6 +56,7 @@ gem 'paperclip'
 gem 'twitter-bootstrap-rails'
 gem 'less-rails'
 gem 'kaminari'
+gem 'aws-sdk'
 
 group :test do
   gem 'rspec-rails'

@@ -1,7 +1,7 @@
 .direction_image_form
   .direction_image_upload(data-direction_id="#{direction.id}")
     - if direction.image?
-      = image_tag(direction.image.url(:medium))
+      = image_tag direction.authenticated_image_url(:medium)
     - else
       %div 写真をのせる
   = link_to '写真を削除', delete_image_recipe_direction_path(direction.recipe_id, direction.id), method: :delete, data: { confirm: '削除した写真は元に戻すことができません。本当に削除しますか？' }, remote: true if direction.image?

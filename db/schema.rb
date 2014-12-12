@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141128050944) do
+ActiveRecord::Schema.define(version: 20141212034804) do
 
   create_table "directions", force: true do |t|
     t.integer  "recipe_id"

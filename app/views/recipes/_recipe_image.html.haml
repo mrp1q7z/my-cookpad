@@ -3,6 +3,4 @@
   = form_for recipe do |f|
     = f.file_field :image
     = f.submit '保存'
-= image_tag @recipe.image.url(:medium), id: 'recipe_image_upload'
-
-
+= image_tag recipe.authenticated_image_url(:medium), id: 'recipe_image_upload'

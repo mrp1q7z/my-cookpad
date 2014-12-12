@@ -9,7 +9,7 @@
 
   .row
     .col-md-3
-      = image_tag @recipe.image.url(:medium)
+      = image_tag @recipe.authenticated_image_url(:medium)
 
     .col-md-5
       = @recipe.catch_copy
@@ -30,7 +30,7 @@
             %dt
               %h4= direction.step
             %dd
-              %div= image_tag direction.image.url(:medium) if direction.image?
+              %div= image_tag direction.authenticated_image_url(:medium) if direction.image?
               %p= direction.description
 
   .row

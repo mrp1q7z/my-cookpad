@@ -15,7 +15,8 @@ class Recipe < ActiveRecord::Base
     reject_if: proc { |attributes| attributes['message'].blank? }
 
   has_attached_file :image, styles: { medium: "280x420>", thumb: "140x210>" },
-    default_url: "no-image.png"
+    default_url: "no-image.png", storage: :s3, s3_permissions: :private,
+    s3_credentials: "#{Rails.root}/config/s3.yml", path: ":class/:id/:style_:filename"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   scope :published, -> { where(status: :published) }
@@ -43,5 +44,13 @@ class Recipe < ActiveRecord::Base
   def publish
     self.status = :published
     self.save
+  end
+
+  def authenticated_image_url(style)
+    if image.present?
+      image.s3_object(style).url_for(:read, secure: true)
+    else
+      image.url(style)
+    end
   end
 end

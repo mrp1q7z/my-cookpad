@@ -3,7 +3,11 @@ class Direction < ActiveRecord::Base
 
   belongs_to :recipe
 
-  has_attached_file :image, styles: { medium: "214x136>" }
+  has_attached_file :image, styles: { medium: "136x214>" },
+    storage: :s3,
+    s3_permissions: :private,
+    s3_credentials: "#{Rails.root}/config/s3.yml",
+    path: ":class/:id/:style_:filename"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   def save_and_reorder
@@ -38,6 +42,14 @@ class Direction < ActiveRecord::Base
       direction.save
     end
     return true
+  end
+
+  def authenticated_image_url(style)
+    if image.present?
+      image.s3_object(style).url_for(:read, secure: true)
+    else
+      image.url(style)
+    end
   end
 
   private
