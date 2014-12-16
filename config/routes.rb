@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   resources :email_magazines
 
   resources :recipes, only: [:new, :create, :edit, :show, :update] do
+    get :search, on: :collection
     member do
       delete :delete_image
       patch :publish
     end
+
     resources :directions, only: [:create, :update, :destroy] do
       member do
         delete :delete_image
@@ -13,11 +15,11 @@ Rails.application.routes.draw do
         patch :move_lower
       end
     end
+
     resources :tukurepos, only: [:create]
-    get :search, on: :collection
   end
 
-  get 'kitchen/:id', to: 'kitchen#show', as: 'kitchen'
+  resources :kitchens, only: [:show]
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
