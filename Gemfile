@@ -57,6 +57,7 @@ gem 'twitter-bootstrap-rails'
 gem 'less-rails'
 gem 'kaminari'
 gem 'aws-sdk'
+gem 'squeel'
 
 group :test do
   gem 'rspec-rails'

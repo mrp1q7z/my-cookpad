@@ -21,14 +21,10 @@ class Recipe < ActiveRecord::Base
 
   scope :published, -> { where(status: :published) }
   scope :keywords_search, ->(keywords) {
-    tokens = keywords.split(/[[:space:]]/)
-    tokens = tokens.delete_if { |token| token.empty? }
-    tokens = tokens.map { |token| "%#{token}%" }
+    tokens = keywords.split(/[[:space:]]/).delete_if(&:empty?).map { |token| "%#{token}%" }
     if tokens.present?
-      recipes = Recipe.where((['( title || catch_copy like ? )'] * tokens.size).join(' OR '),
-                            *tokens.map { |token| [token] * 1 }.flatten)
+      recipes = where{ (title.matches_any tokens) | (catch_copy.matches_any tokens) }
     end
-    recipes
   }
 
   def build_child_items
