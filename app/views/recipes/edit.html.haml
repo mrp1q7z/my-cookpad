@@ -4,12 +4,14 @@
       =render 'errors'
   .row
     .col-md-8
-      = render 'recipe_title', recipe: @recipe
+      #recipe_title_wrapper
+        = render 'recipe_title', recipe: @recipe
   .row
     .col-md-3
       = render 'recipe_image', recipe: @recipe
     .col-md-5
-      = render 'catch_copy', recipe: @recipe
+      #catch_copy_wrapper
+        = render 'catch_copy', recipe: @recipe
       #ingredients
         %h4 材料
         %ul
@@ -20,7 +22,8 @@
   .row
     .col-md-8
       %h4 作り方
-      = render 'directions/directions', directions: @recipe.directions
+      #directions
+        = render 'directions/directions', directions: @recipe.directions
   .row
     .col-md-8
       %p= link_to 'レシピを公開', publish_recipe_path, method: :patch, class: "btn btn-primary", data: { confirm: 'レシピを公開します。よろしいですか？'}

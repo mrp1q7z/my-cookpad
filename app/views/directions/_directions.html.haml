@@ -1,14 +1,13 @@
-#directions
-  - directions.sort_by{|d| d.step}.each do |direction|
-    .hbox_list
-      %dl
-        %dt
-          %h4
-            = direction.step
-            %span= link_to '←', move_highter_recipe_direction_path(direction.recipe_id, direction.id), method: :patch, remote: true
-            %span= link_to '→', move_lower_recipe_direction_path(direction.recipe_id, direction.id), method: :patch, remote: true
-          = link_to '削除', recipe_direction_path(direction.recipe_id, direction.id), method: :delete, data: { confirm: 'この作り方を削除しますか？' }, remote: true if direction.id
-          = link_to '追加', recipe_directions_path(direction.recipe_id, direction: { step: direction.step + 1}), method: :post, remote: true
-        %dd
-          = render 'directions/direction_image_form', direction: direction
-          = render 'directions/direction_text_form', direction: direction
+- directions.sort_by{|d| d.step}.each do |direction|
+  .hbox_list
+    %dl
+      %dt
+        %h4
+          = direction.step
+          %span= link_to '←', move_highter_recipe_direction_path(direction.recipe_id, direction.id), method: :patch, remote: true
+          %span= link_to '→', move_lower_recipe_direction_path(direction.recipe_id, direction.id), method: :patch, remote: true
+        = link_to '削除', recipe_direction_path(direction.recipe_id, direction.id), method: :delete, data: { confirm: 'この作り方を削除しますか？' }, remote: true if direction.id
+        = link_to '追加', recipe_directions_path(direction.recipe_id, direction: { step: direction.step + 1}), method: :post, remote: true
+      %dd
+        = render 'directions/direction_image_form', direction: direction
+        = render 'directions/direction_text_form', direction: direction

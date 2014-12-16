@@ -1,7 +1,6 @@
-#recipe_title_wrapper
-  %h1#recipe_title_text.text-success= recipe.title
-  #recipe_title_form
-    = form_for recipe, remote: true do |f|
-      = f.text_field :title, size: 60
-      = f.submit '保存'
-      = link_to '取消', "javascript:void(0)", { id: 'cancel_recipe_title_form' }
+%h1#recipe_title_text.text-success= recipe.title
+#recipe_title_form
+  = form_for recipe, remote: true do |f|
+    = f.text_field :title, size: 60
+    = f.submit '保存'
+    = link_to '取消', "javascript:void(0)", { id: 'cancel_recipe_title_form' }
