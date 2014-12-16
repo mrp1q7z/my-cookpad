@@ -45,7 +45,7 @@ class DirectionsController < ApplicationController
   end
 
   def set_recipe
-    @recipe = Recipe.find(params[:recipe_id])
+    @recipe = current_user.recipes.find(params[:recipe_id])
   end
 
   def set_direction
